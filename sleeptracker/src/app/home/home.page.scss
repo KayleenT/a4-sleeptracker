@@ -25,3 +25,40 @@
 #container a {
   text-decoration: none;
 }
+
+ion-title{
+  --color: #2b183da9;
+}
+
+ion-content{
+  --background: #b8dae4;
+}
+
+ion-card{
+  --background: #ffffff8f;
+  --color: #FFFFFF
+  --background: #f7ffe3;
+  border-radius: 16px;
+  margin: 16px 0;
+  text-align: center;
+  padding-top: 5%;
+  padding-bottom:5%;
+  border-radius: 30px;
+
+
+  strong{
+    font-size: 30px;
+  }
+}
+
+ion-card-title{
+  font-size: 30px;
+  font-weight: 800;
+  font-family: system-ui;
+  --color: #555c6a;
+
+}
+
+ion-button{
+  --background: 
+}
