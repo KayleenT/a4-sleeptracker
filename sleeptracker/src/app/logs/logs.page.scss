@@ -4,12 +4,6 @@ h1 {
   margin: 0 0 12px 4px;
 }
 
-h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 20px 0 8px 4px;
-}
-
 .card {
   padding: 14px 20px;
   margin-bottom: 12px;
@@ -23,6 +17,11 @@ h3 {
 .log-date {
   font-size: 17px !important;
   font-weight: 700;
+}
+
+.label {
+  font-weight: 600;
+  margin-top: 12px !important;
 }
 
 .detail {

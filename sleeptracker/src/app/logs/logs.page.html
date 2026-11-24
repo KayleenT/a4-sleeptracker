@@ -2,30 +2,32 @@
   <div class="page">
     <h1>My Logs</h1>
 
-    @if (sleepLogs.length === 0 && tiredLogs.length === 0) {
+    @if (days.length === 0) {
       <div class="card empty">
         No logs yet. Head to the home tab to log your first night!
       </div>
     }
 
-    @if (sleepLogs.length > 0) {
-      <h3>Sleep</h3>
-    }
-    @for (log of sleepLogs; track log.id) {
+    <!-- one card per day -->
+    @for (day of days; track day.date) {
       <div class="card">
-        <p class="log-date">{{ log.getSleepStart() | date: 'MMM d, y' }}</p>
-        <p>{{ log.getSleepStart() | date: 'h:mm a' }} to {{ log.getSleepEnd() | date: 'h:mm a' }}</p>
-        <p class="detail">Slept {{ log.summaryString() }}</p>
-      </div>
-    }
+        <p class="log-date">{{ day.date | date: 'MMM d, y' }}</p>
 
-    @if (tiredLogs.length > 0) {
-      <h3>Sleepiness</h3>
-    }
-    @for (log of tiredLogs; track log.id) {
-      <div class="card">
-        <p class="log-date">{{ log.getLoggedAt() | date: 'MMM d, y' }} at {{ log.getLoggedAt() | date: 'h:mm a' }}</p>
-        <p>Level {{ log.summaryString() }}</p>
+        @if (day.sleep) {
+          <p>
+            Slept {{ day.sleep.getSleepStart() | date: 'h:mm a' }}
+            to {{ day.sleep.getSleepEnd() | date: 'h:mm a' }}
+          </p>
+        } @else {
+          <p class="detail">No sleep logged</p>
+        }
+
+        <p class="label">Sleepiness logs:</p>
+        @for (tired of day.tiredLogs; track tired.id) {
+          <p class="tired">{{ tired.getLoggedAt() | date: 'h:mm a' }} - {{ tired.summaryString() }}</p>
+        } @empty {
+          <p class="detail">None yet</p>
+        }
       </div>
     }
   </div>
