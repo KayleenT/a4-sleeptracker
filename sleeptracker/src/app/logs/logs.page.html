@@ -14,17 +14,27 @@
         <p class="log-date">{{ day.date | date: 'MMM d, y' }}</p>
 
         @if (day.sleep) {
-          <p>
-            Slept {{ day.sleep.getSleepStart() | date: 'h:mm a' }}
-            to {{ day.sleep.getSleepEnd() | date: 'h:mm a' }}
-          </p>
+          <div class="log-row">
+            <button class="remove" (click)="deleteLog(day.sleep)" aria-label="Delete sleep log">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </button>
+            <p>
+              Slept {{ day.sleep.getSleepStart() | date: 'h:mm a' }}
+              to {{ day.sleep.getSleepEnd() | date: 'h:mm a' }}
+            </p>
+          </div>
         } @else {
           <p class="detail">No sleep logged</p>
         }
 
         <p class="label">Sleepiness logs:</p>
         @for (tired of day.tiredLogs; track tired.id) {
-          <p class="tired">{{ tired.getLoggedAt() | date: 'h:mm a' }} - {{ tired.summaryString() }}</p>
+          <div class="log-row">
+            <button class="remove" (click)="deleteLog(tired)" aria-label="Delete sleepiness log">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </button>
+            <p>{{ tired.getLoggedAt() | date: 'h:mm a' }} - {{ tired.summaryString() }}</p>
+          </div>
         } @empty {
           <p class="detail">None yet</p>
         }

@@ -102,6 +102,20 @@ export class SleepService {
     return sleepData;
   }
 
+  // delete any sleep or sleepiness log (every log has its own id) and save the updated data
+  public deleteLog(sleepData: SleepData) {
+    SleepService.AllSleepData = SleepService.AllSleepData.filter(
+      (sleep) => sleep.id !== sleepData.id
+    );
+    SleepService.AllOvernightData = SleepService.AllOvernightData.filter(
+      (sleep) => sleep.id !== sleepData.id
+    );
+    SleepService.AllSleepinessData = SleepService.AllSleepinessData.filter(
+      (sleep) => sleep.id !== sleepData.id
+    );
+    this.saveData();
+  }
+
   // return all the overnight sleep records
   public getOvernightHistory(): OvernightSleepData[] {
     return [...SleepService.AllOvernightData];

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonContent, IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { removeCircleOutline } from 'ionicons/icons';
 import { SleepService } from '../services/sleep.service';
+import { SleepData } from '../data/sleep-data';
 import { OvernightSleepData } from '../data/overnight-sleep-data';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 
@@ -16,18 +19,30 @@ interface DayLog {
   selector: 'app-logs',
   templateUrl: 'logs.page.html',
   styleUrls: ['logs.page.scss'],
-  imports: [IonContent, DatePipe],
+  imports: [IonContent, IonIcon, DatePipe],
 })
 export class LogsPage {
   days: DayLog[] = [];
 
-  constructor(private sleepService: SleepService) {}
+  constructor(private sleepService: SleepService) {
+    addIcons({ removeCircleOutline });
+  }
 
   // runs every time the page is opened, so new logs from the home page show up
   async ionViewWillEnter() {
     // wait for the saved logs to finish loading when the app first opens
     await this.sleepService.ready;
+    this.buildDays();
+  }
 
+  // remove a sleep or sleepiness log, then redraw the cards
+  deleteLog(log: SleepData) {
+    this.sleepService.deleteLog(log);
+    this.buildDays();
+  }
+
+  // groups all the logs into one card per day
+  buildDays() {
     this.days = [];
 
     // a night of sleep goes on the day the user woke up

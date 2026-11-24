@@ -24,6 +24,23 @@ h1 {
   margin-top: 12px !important;
 }
 
+/* minus button next to each sleep and sleepiness log */
+.log-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remove {
+  display: flex;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--navy);
+  font-size: 22px;
+}
+
 .detail {
   color: var(--soft-text);
 }
