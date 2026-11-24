@@ -1,4 +1,4 @@
---Readme document for *author(s)*, *email(s)*, *UCI id(s)*--
+--Readme document for Jackie Giang & Kayleen Tran, Jackieg4@uci.edu & kaylett3@uci.edu, 70624241 & 51084482--
 
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
