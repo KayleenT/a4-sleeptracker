@@ -1,5 +1,16 @@
 --Readme document for Jackie Giang & Kayleen Tran, Jackieg4@uci.edu & kaylett3@uci.edu, 70624241 & 51084482--
 
+Demo Timestamps:
+log sleep - 9 seconds
+view sleep log - 16 second
+log sleepiness - 19 seconds
+view sleepiness log - 23 seconds
+data persists after refresh - 25 seconds
+overwrite sleep log - 33 seconds
+delete sleep and sleepiness logs - 35 seconds
+schedule a notification - 40 seconds
+notification received - 55 seconds
+
 1. How many assignment points do you believe you completed (replace the *'s with your numbers)?
 
 10/10
