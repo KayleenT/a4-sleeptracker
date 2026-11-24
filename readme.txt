@@ -2,7 +2,7 @@
 
 Demo Timestamps:
 log sleep - 9 seconds
-view sleep log - 16 second
+view sleep log - 16 seconds
 log sleepiness - 19 seconds
 view sleepiness log - 23 seconds
 data persists after refresh - 25 seconds
