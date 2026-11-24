@@ -29,7 +29,14 @@ None besides partnership members
 
 5. Is there anything special we need to know in order to run your code?
 
-None
+Local push notifications are only supported on iOS in our implementation. To test customizable daily reminders, run the following commands:
+
+npm install
+ionic build
+npx cap sync ios
+npx cap open ios
+
+Then build and run the app using Xcode; making sure to allow notification permissions when prompted.
 
 --Aim for no more than two sentences for each of the following questions.--
 
