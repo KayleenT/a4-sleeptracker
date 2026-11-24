@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Preferences } from "@capacitor/preferences";
 import { SleepData } from "../data/sleep-data";
 import { OvernightSleepData } from "../data/overnight-sleep-data";
 import { StanfordSleepinessData } from "../data/stanford-sleepiness-data";
@@ -7,15 +8,18 @@ import { StanfordSleepinessData } from "../data/stanford-sleepiness-data";
   providedIn: "root",
 })
 export class SleepService {
-  // key used to store sleep data in local storage
+  // key used to store sleep data in Capacitor Preferences
   private readonly storageKey = "sleepTrackerData";
   public static AllSleepData: SleepData[] = [];
   public static AllOvernightData: OvernightSleepData[] = [];
   public static AllSleepinessData: StanfordSleepinessData[] = [];
 
+  // finishes once the saved data has been loaded, pages can wait on this
+  public ready: Promise<void>;
+
   constructor() {
     // load previously saved sleep data
-    this.loadData();
+    this.ready = this.loadData();
   }
 
   // store overnight sleep record + save
@@ -113,8 +117,8 @@ export class SleepService {
     return [...SleepService.AllSleepData];
   }
 
-  // convert sleep records into JSON and save it to local storage
-  private saveData(): void {
+  // convert sleep records into JSON and save it with Preferences
+  private async saveData(): Promise<void> {
     const data = {
       overnight: SleepService.AllOvernightData.map((sleep) => ({
         sleepStart: sleep.getSleepStart().toISOString(),
@@ -127,12 +131,15 @@ export class SleepService {
       })),
     };
 
-    localStorage.setItem(this.storageKey, JSON.stringify(data));
+    await Preferences.set({
+      key: this.storageKey,
+      value: JSON.stringify(data),
+    });
   }
 
-  // restore the saved data from local storage
-  private loadData(): void {
-    const savedData = localStorage.getItem(this.storageKey);
+  // restore the saved data from Preferences
+  private async loadData(): Promise<void> {
+    const { value: savedData } = await Preferences.get({ key: this.storageKey });
 
     if (savedData === null) {
       return;

@@ -24,7 +24,10 @@ export class LogsPage {
   constructor(private sleepService: SleepService) {}
 
   // runs every time the page is opened, so new logs from the home page show up
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    // wait for the saved logs to finish loading when the app first opens
+    await this.sleepService.ready;
+
     this.days = [];
 
     // a night of sleep goes on the day the user woke up
