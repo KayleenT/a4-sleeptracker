@@ -3,8 +3,9 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonIcon, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { bed } from 'ionicons/icons';
+import { bed, removeCircleOutline } from 'ionicons/icons';
 import { SleepService } from '../services/sleep.service';
+import { ReminderService } from '../services/reminder.service';
 import { StanfordSleepinessData } from '../data/stanford-sleepiness-data';
 
 @Component({
@@ -27,8 +28,17 @@ export class HomePage {
   scale = StanfordSleepinessData.ScaleValues;
   tiredMessage = '';
 
-  constructor(private sleepService: SleepService) {
-    addIcons({ bed });
+  // sleepiness reminder times as "HH:MM" strings
+  reminderTimes: string[] = [];
+  addingReminder = false;
+  newTime = '12:00';
+  reminderMessage = '';
+
+  constructor(private sleepService: SleepService, private reminderService: ReminderService) {
+    addIcons({ bed, removeCircleOutline });
+
+    // show the reminders the user saved last time
+    this.reminderTimes = this.reminderService.getSettings().reminderTimes;
   }
 
   // shows how long the user slept before they save, look like "8H 30M"
@@ -72,5 +82,46 @@ export class HomePage {
     } catch (error) {
       this.tiredMessage = (error as Error).message;
     }
+  }
+
+  async addReminder() {
+    // keep the list in time order
+    const times = [...this.reminderTimes, this.newTime].sort();
+    const saved = await this.saveReminders(times);
+
+    if (saved) {
+      this.addingReminder = false;
+    }
+  }
+
+  async removeReminder(time: string) {
+    const times = this.reminderTimes.filter((t) => t !== time);
+    await this.saveReminders(times);
+  }
+
+  // reschedules the notifications with the new list, returns false if something went wrong
+  async saveReminders(times: string[]): Promise<boolean> {
+    try {
+      await this.reminderService.updateSettings({
+        ...this.reminderService.getSettings(),
+        enabled: times.length > 0,
+        reminderTimes: times,
+      });
+      this.reminderTimes = times;
+      this.reminderMessage = '';
+      return true;
+    } catch (error) {
+      this.reminderMessage = (error as Error).message;
+      return false;
+    }
+  }
+
+  // turns "16:30" into "4:30 pm"
+  formatTime(time: string): string {
+    const [hour, minute] = time.split(':').map(Number);
+    const amPm = hour < 12 ? 'am' : 'pm';
+    const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+
+    return hour12 + ':' + String(minute).padStart(2, '0') + ' ' + amPm;
   }
 }

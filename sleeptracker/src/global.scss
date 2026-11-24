@@ -41,18 +41,33 @@
 
 /* very cool gradient background */
 ion-content {
-  --background: linear-gradient(180deg, #fdfbee 0%, #f6f6f6 50%, #eef1fd 100%);
+  --background: #DBE1F7;
   --color: var(--navy);
 }
 
 /* adding safe space at top and bottom */
 .page {
   padding: calc(var(--ion-safe-area-top, 0px) + 50px) 20px 130px;
+  /* on tablets and computers keep the cards phone-sized and centered */
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* smaller phones (like iPhone SE): less padding around the page */
+@media (max-width: 375px) {
+  .page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card {
+    padding: 18px 14px;
+  }
 }
 
 /* white rounded box with a navy outline */
 .card {
-  background: white;
+  background: #fffefb;
   border: 2px solid var(--navy);
   border-radius: 16px;
   padding: 24px 20px;
@@ -72,7 +87,11 @@ ion-content {
   padding: 16px 50px;
   border-radius: 40px;
   background: var(--navy);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ionic buttons come with a shadow by default, turn it off */
+ion-button {
+  --box-shadow: none;
 }
 
 .tab-bar a {

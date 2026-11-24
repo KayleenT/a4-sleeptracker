@@ -44,7 +44,7 @@
         @if (selectedLevel > 0) {
           {{ scale[selectedLevel] }}
         } @else {
-          Tap a number (1 = wide awake, 7 = almost asleep)
+          Select sleepiness from a scale of 1-7 (1 being not tired and 7 being the highest level)
         }
       </p>
 
@@ -54,6 +54,40 @@
       @if (tiredMessage) {
         <p class="message">{{ tiredMessage }}</p>
       }
+    </div>
+
+    <!-- daily sleepiness reminder card -->
+    <div class="card">
+      <h2 class="card-title">Set Notifications</h2>
+      <p class="subtitle">We'll send reminders to log your sleepiness</p>
+
+      @if (addingReminder) {
+        <div class="add-row">
+          <input type="time" [(ngModel)]="newTime" />
+          <ion-button class="small-button" (click)="addReminder()">Add</ion-button>
+          <ion-button class="cancel" fill="clear" (click)="addingReminder = false">Cancel</ion-button>
+        </div>
+      } @else {
+        <ion-button class="small-button" (click)="addingReminder = true">Add notification</ion-button>
+      }
+
+      @if (reminderMessage) {
+        <p class="message">{{ reminderMessage }}</p>
+      }
+
+      <div class="reminder-list">
+        <p class="list-title">Current notifications:</p>
+        @for (time of reminderTimes; track time) {
+          <div class="reminder">
+            <button class="remove" (click)="removeReminder(time)" aria-label="Remove reminder">
+              <ion-icon name="remove-circle-outline"></ion-icon>
+            </button>
+            {{ formatTime(time) }}
+          </div>
+        } @empty {
+          <p class="no-reminders">No reminders yet</p>
+        }
+      </div>
     </div>
   </div>
 </ion-content>

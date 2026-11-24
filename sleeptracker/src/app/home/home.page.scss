@@ -20,6 +20,7 @@ h1 {
 
   label {
     flex: 1;
+    min-width: 0;
     text-align: center;
     font-size: 14px;
     font-weight: 600;
@@ -28,6 +29,7 @@ h1 {
   input {
     display: block;
     width: 100%;
+    box-sizing: border-box;
     margin-top: 6px;
     padding: 10px;
     border: 1px solid var(--light-border);
@@ -56,6 +58,7 @@ h1 {
 
 .level {
   flex: 1;
+  min-width: 0;
   height: 64px;
   border: 1px solid var(--light-border);
   border-radius: 10px;
@@ -91,4 +94,115 @@ h1 {
   text-align: center;
   font-size: 13px;
   margin: 10px 0 0;
+}
+
+/* ---------- Set Notifications card ---------- */
+
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  margin: 4px 0 12px;
+}
+
+.small-button {
+  --background: var(--navy);
+  --border-radius: 30px;
+  font-weight: 600;
+  text-transform: none;
+  margin: 0;
+}
+
+.cancel {
+  --color: var(--navy);
+  text-transform: none;
+}
+
+/* time picker + Add + Cancel in one row */
+.add-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  input {
+    padding: 8px;
+    border: 1px solid var(--light-border);
+    border-radius: 10px;
+    background: var(--light-blue);
+    color: var(--navy);
+    font-size: 16px;
+    font-family: inherit;
+  }
+}
+
+/* outlined box with the list of reminder times */
+.reminder-list {
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-top: 16px;
+}
+
+.list-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.reminder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+/* minus button to delete a reminder */
+.remove {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--navy);
+  font-size: 26px;
+}
+
+.no-reminders {
+  font-size: 14px;
+  color: var(--soft-text);
+  margin: 0;
+}
+
+/* smaller phones: shrink the big text and buttons so everything fits */
+@media (max-width: 375px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  .times {
+    gap: 10px;
+
+    input {
+      font-size: 16px;
+      padding: 8px 2px;
+    }
+  }
+
+  .levels {
+    gap: 4px;
+  }
+
+  .level {
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .submit {
+    width: 80%;
+  }
 }
