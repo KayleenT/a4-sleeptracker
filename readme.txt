@@ -13,10 +13,14 @@
 
 2. How long, in hours, did it take you to complete this assignment?
 
-
+25 hours
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
 
+ionic intro - https://youtu.be/iLLXfPwrtj0?si=lgNF01OeA2hDAGKe
+ionic app making - https://youtu.be/whnA4Eod3xo?si=-jlU-fci5VZ5d94J
+capacitor reference - https://youtu.be/x2jRs7Qqai8?si=x4YozbC9u4v7x5BT
+capacitor preferences storage reference - https://capacitorjs.com/docs/apis/preferences
 
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
@@ -60,6 +64,8 @@ We added a native notification system that allows the user to set a list of set 
 
 13. If you backed up logged data, where does it back up to?
 
-
+Logged data is backed up using Capacitor Preferences and uses an iPhone's permanent app storage.
 
 14. How does your app implement or follow principles of good mobile design?
+
+The app follows principles of good mobile design by displaying a good initial view (the app's main functionalities in a self-descriptive way), allowing users to navigate between pages easily and rewrite over incorrect entries, preventing errors by not letting invalid inputs be possible, and following mobile app conventions in style and navigation. 
