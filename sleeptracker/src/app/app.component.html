@@ -1,3 +1,13 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+
+  <!-- floating bottom nav shared by every page -->
+  <nav class="tab-bar">
+    <a routerLink="/home" routerLinkActive="active" aria-label="Home">
+      <ion-icon name="home"></ion-icon>
+    </a>
+    <a routerLink="/logs" routerLinkActive="active" aria-label="My Logs">
+      <ion-icon name="document-text"></ion-icon>
+    </a>
+  </nav>
 </ion-app>

@@ -18,14 +18,14 @@ export class SleepService {
     this.loadData();
   }
 
-  // store overnight sleep record and save the updated data
+  // store overnight sleep record + save
   public logOvernightData(sleepData: OvernightSleepData) {
     SleepService.AllSleepData.push(sleepData);
     SleepService.AllOvernightData.push(sleepData);
     this.saveData();
   }
 
-  // validate the sleep times and create the record
+  // validate the sleep times + create the record
   public addOvernightSleep(
     sleepStart: Date,
     sleepEnd: Date
@@ -37,6 +37,17 @@ export class SleepService {
     if (sleepEnd.getTime() <= sleepStart.getTime()) {
       throw new Error("Wake-up time must be after bedtime");
     }
+
+    // only one overnight log per day, so remove any earlier log that woke up on the same day
+    const wakeDay = sleepEnd.toDateString();
+    SleepService.AllOvernightData = SleepService.AllOvernightData.filter(
+      (sleep) => sleep.getSleepEnd().toDateString() !== wakeDay
+    );
+    SleepService.AllSleepData = SleepService.AllSleepData.filter(
+      (sleep) =>
+        !(sleep instanceof OvernightSleepData) ||
+        sleep.getSleepEnd().toDateString() !== wakeDay
+    );
 
     const sleepData = new OvernightSleepData(sleepStart, sleepEnd);
 

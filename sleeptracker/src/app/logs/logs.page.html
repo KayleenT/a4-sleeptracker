@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <div class="page">
+    <h1>My Logs</h1>
+
+    @if (sleepLogs.length === 0 && tiredLogs.length === 0) {
+      <div class="card empty">
+        No logs yet. Head to the home tab to log your first night!
+      </div>
+    }
+
+    @if (sleepLogs.length > 0) {
+      <h3>Sleep</h3>
+    }
+    @for (log of sleepLogs; track log.id) {
+      <div class="card">
+        <p class="log-date">{{ log.getSleepStart() | date: 'MMM d, y' }}</p>
+        <p>{{ log.getSleepStart() | date: 'h:mm a' }} to {{ log.getSleepEnd() | date: 'h:mm a' }}</p>
+        <p class="detail">Slept {{ log.summaryString() }}</p>
+      </div>
+    }
+
+    @if (tiredLogs.length > 0) {
+      <h3>Sleepiness</h3>
+    }
+    @for (log of tiredLogs; track log.id) {
+      <div class="card">
+        <p class="log-date">{{ log.getLoggedAt() | date: 'MMM d, y' }} at {{ log.getLoggedAt() | date: 'h:mm a' }}</p>
+        <p>Level {{ log.summaryString() }}</p>
+      </div>
+    }
+  </div>
+</ion-content>

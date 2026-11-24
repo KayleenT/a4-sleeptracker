@@ -1,21 +1,59 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      sleep tracker
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="page">
+    <h2 class="date">{{ today | date: 'MMM d, y' }}</h2>
 
-<ion-content [fullscreen]="true" >
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- log last night sleep card -->
+    <div class="card">
+      <h1>Log your sleep <ion-icon name="bed"></ion-icon></h1>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Ready to sleep?</ion-card-title>
-  </ion-card-header>
+      <div class="times">
+        <label>
+          Slept at
+          <input type="time" [(ngModel)]="sleptAt" />
+        </label>
+        <label>
+          Woke up at
+          <input type="time" [(ngModel)]="wokeAt" />
+        </label>
+      </div>
 
-</ion-card>
+      <p class="hours">Hours Slept: {{ hoursSlept }}</p>
+
+      <ion-button class="submit" (click)="saveSleep()">Save Sleep</ion-button>
+      @if (sleepMessage) {
+        <p class="message">{{ sleepMessage }}</p>
+      }
+    </div>
+
+    <!-- sleepiness logging card -->
+    <div class="card">
+      <h1>How tired are you?</h1>
+
+      <div class="levels">
+        @for (level of levels; track level) {
+          <button
+            class="level"
+            [class.selected]="level === selectedLevel"
+            (click)="pickLevel(level)">
+            {{ level }}
+          </button>
+        }
+      </div>
+
+      <p class="description">
+        @if (selectedLevel > 0) {
+          {{ scale[selectedLevel] }}
+        } @else {
+          Tap a number (1 = wide awake, 7 = almost asleep)
+        }
+      </p>
+
+      <ion-button class="submit" [disabled]="selectedLevel === 0" (click)="submitTiredness()">
+        Submit Log
+      </ion-button>
+      @if (tiredMessage) {
+        <p class="message">{{ tiredMessage }}</p>
+      }
+    </div>
+  </div>
+</ion-content>

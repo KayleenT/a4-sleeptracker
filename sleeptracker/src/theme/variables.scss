@@ -1,2 +1,22 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+:root {
+  // our app's colors
+  --navy: #23367a;
+  --light-blue: #dfe4f7;
+  --light-border: #a9b4e0;
+  --soft-text: #5a6490;
+
+  // make Ionic's primary color match our navy
+  --ion-color-primary: #23367a;
+  --ion-color-primary-rgb: 35, 54, 122;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1f306b;
+  --ion-color-primary-tint: #394a87;
+
+  // SF Pro everywhere (-apple-system is SF Pro on Apple devices)
+  --ion-font-family: "SF Pro Display", "SF Pro Text", "SF Pro", -apple-system, sans-serif;
+  --ion-text-color: #23367a;
+}
