@@ -18,10 +18,14 @@
             <button class="remove" (click)="deleteLog(day.sleep)" aria-label="Delete sleep log">
               <ion-icon name="remove-circle-outline"></ion-icon>
             </button>
-            <p>
-              Slept {{ day.sleep.getSleepStart() | date: 'h:mm a' }}
-              to {{ day.sleep.getSleepEnd() | date: 'h:mm a' }}
-            </p>
+            <div>
+              <p>
+                Slept {{ day.sleep.getSleepStart() | date: 'h:mm a' }}
+                to {{ day.sleep.getSleepEnd() | date: 'h:mm a' }}
+              </p>
+              <!-- how long they slept, e.g. "8H 30M" -->
+              <p class="detail">{{ day.sleep.summaryString() }}</p>
+            </div>
           </div>
         } @else {
           <p class="detail">No sleep logged</p>

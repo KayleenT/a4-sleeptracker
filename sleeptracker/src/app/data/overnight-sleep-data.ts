@@ -27,12 +27,12 @@ export class OvernightSleepData extends SleepData {
     // Calculate the difference in milliseconds
     var difference_ms = sleepEnd_ms - sleepStart_ms;
 
-    // Convert to hours and minutes
+    // Convert to hours and minutes, e.g. "8H 30M" (same as the home page)
     return (
       Math.floor(difference_ms / (1000 * 60 * 60)) +
-      " hours, " +
+      "H " +
       Math.floor((difference_ms / (1000 * 60)) % 60) +
-      " minutes."
+      "M"
     );
   }
 
