@@ -48,7 +48,7 @@ We chose to log overnight sleep by the user entering the start time and stop tim
 
 9. How can a person log sleepiness during the day in your app? Why did you choose to support logging sleepiness in this way?
 
-We have a sleepiness log question on the home page that we designed that asks for the user's sleepiness level from 1-7 (based off of the stanford sleepiness scale since we felt it was a well described and simple scale to use). We chose to log sleepiness this way because once users are familiar with how to connect their sleepiness level to one of the 1-7 levels, choosing a number from 1-7 is a quick action that they can complete without hassle.
+We have a sleepiness log question on the home page that we designed that asks for the user's sleepiness level from 1-7. We chose to log sleepiness this way because once users are familiar with how to connect their sleepiness level to one of the 1-7 levels, choosing a number from 1-7 is a quick action that they can complete without hassle.
 
 10. How can a person view the data they logged in your app? Why did you choose to support viewing logged data in this way?
 
@@ -68,4 +68,4 @@ Logged data is backed up using Capacitor Preferences and uses an iPhone's perman
 
 14. How does your app implement or follow principles of good mobile design?
 
-The app follows principles of good mobile design by displaying a good initial view (the app's main functionalities in a self-descriptive way), allowing users to navigate between pages easily and rewrite over incorrect entries, preventing errors by not letting invalid inputs be possible, and following mobile app conventions in style and navigation. 
+The app follows principles of good mobile design by displaying a good initial view (the app's main functionalities in a self-descriptive way), allowing users to navigate between pages easily and rewrite over incorrect entries, preventing errors by only allowing valid inputs, and following mobile app conventions in style and navigation. 
